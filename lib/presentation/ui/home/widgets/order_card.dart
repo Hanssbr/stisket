@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/core.dart';
-import '../models/product_model.dart';
+import '../../../../data/model/products_model.dart';
 
 class OrderCard extends StatelessWidget {
-  final ProductModel item;
+  final Products item;
   const OrderCard({super.key, required this.item});
 
   @override
@@ -23,7 +23,7 @@ class OrderCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  item.productName,
+                  item.name,
                   style: const TextStyle(fontSize: 15.0),
                 ),
               ),
@@ -49,7 +49,7 @@ class OrderCard extends StatelessWidget {
             ],
           ),
           Text(
-            item.type,
+            item.description,
             style: const TextStyle(fontSize: 11.0),
           ),
           const SpaceHeight(8.0),

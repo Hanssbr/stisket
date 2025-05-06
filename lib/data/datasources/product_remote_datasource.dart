@@ -1,11 +1,12 @@
 import 'dart:convert';
 
-import '../model/products_model.dart';
-import 'auth_local_datasource.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/products_model.dart';
+import 'auth_local_datasource.dart';
+
 class ProductRemoteDatasource {
-  Future<List<Products>>getProducts() async {
+  Future<List<Products>> getProducts() async {
     final token = await AuthLocalDatasource().getToken();
     final response = await http.get(
       Uri.parse('https://tiket.hanssu.my.id/api/all-products'),
@@ -15,11 +16,11 @@ class ProductRemoteDatasource {
         'Authorization': 'Bearer $token',
       },
     );
-    if (response.statusCode == 200){
+    if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
       final data = body['data'];
       return data.map<Products>((json) => Products.fromJson(json)).toList();
-    }else {
+    } else {
       throw Exception('Failed to load products');
     }
   }

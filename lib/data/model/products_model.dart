@@ -10,8 +10,8 @@ class Products {
   final String criteria;
   final int favorite;
   final dynamic deletedAt;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final String createdAt;
+  final String updatedAt;
   final Category category;
 
   Products({
@@ -31,23 +31,39 @@ class Products {
     required this.category,
   });
 
-  factory Products.fromJson(Map<String, dynamic> json) {
-    return Products(
+  factory Products.fromJson(Map<String, dynamic> json) => Products(
         id: json['id'],
         name: json['name'],
         description: json['description'],
         price: json['price'],
         stock: json['stock'],
-        categoryId: json['categoryId'],
+        categoryId: json['category_id'],
         image: json['image'],
         status: json['status'],
         criteria: json['criteria'],
         favorite: json['favorite'],
-        deletedAt: json['deletedAt'],
-        createdAt: json['createdAt'],
-        updatedAt: json['updateAt'],
-        category: json['category']);
-  }
+        deletedAt: json['deleted_at'],
+        createdAt: json['created_at'],
+        updatedAt: json['updated_at'],
+        category: Category.fromJson(json['category']),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'description': description,
+        'price': price,
+        'stock': stock,
+        'category_id': categoryId,
+        'image': image,
+        'status': status,
+        'criteria': criteria,
+        'favorite': favorite,
+        'deleted_at': deletedAt,
+        'created_at': createdAt,
+        'updated_at': updatedAt,
+        'category': category.toJson(),
+      };
 }
 
 class Category {
@@ -66,12 +82,18 @@ class Category {
   });
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-        id: json['id'],
-        name: json['name'],
-        description: json['description'],
-        createdAt: DateTime.parse(json['created_at']),
-        updatedAt: DateTime.parse(json['updated_at']),
+        id: json["id"],
+        name: json["name"],
+        description: json["description"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "description": description,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
 }
-
-
