@@ -16,13 +16,13 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.29.3" # sesuaikan dengan versi kamu
+          flutter-version: "1.0.0+1" # sesuaikan dengan versi kamu
 
       - name: Install Dependencies
         run: flutter pub get
 
       - name: Build Web
-        run: flutter build web --base-href="/stisket/"
+        run: flutter build web --base-href="/flutter_loak/"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
