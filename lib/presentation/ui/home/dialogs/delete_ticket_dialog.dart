@@ -32,7 +32,7 @@ class DeleteTicketDialog extends StatelessWidget {
             children: [
               Flexible(
                 child: Button.filled(
-                  onPressed: () => context.pop(),
+                  onPressed: () => context.pop(false),
                   label: 'Batalkan',
                   borderRadius: 8.0,
                   color: AppColors.buttonCancel,
@@ -44,7 +44,7 @@ class DeleteTicketDialog extends StatelessWidget {
               const SpaceWidth(12.0),
               Flexible(
                 child: Button.filled(
-                  onPressed: () => context.pop(),
+                  onPressed: () => context.pop(true),
                   label: 'Hapus',
                   borderRadius: 8.0,
                   height: 44.0,

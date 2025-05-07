@@ -8,6 +8,7 @@ import 'data/datasources/auth_remote_datasource.dart';
 import 'data/datasources/product_remote_datasource.dart';
 import 'data/repository/auth_repository_impl.dart';
 import 'data/repository/products_repository_impl.dart';
+import 'domain/usecases/delete_product_usecase.dart';
 import 'domain/usecases/get_all_products_usecase.dart';
 import 'domain/usecases/login_usecase.dart';
 import 'domain/usecases/logout_usecase.dart';
@@ -42,6 +43,11 @@ class MyApp extends StatelessWidget {
                 ProductRemoteDatasource(),
               ),
             ),
+            DeleteProductUsecase(
+              ProductsRepositoryImpl(
+                ProductRemoteDatasource()
+              )
+            )
           ),
         ),
       ],

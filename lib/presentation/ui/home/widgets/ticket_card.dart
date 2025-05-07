@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/core.dart';
+import '../../../../data/model/products_model.dart';
+import '../bloc/products_bloc.dart';
+import '../bloc/products_event.dart';
 import '../dialogs/delete_ticket_dialog.dart';
 import '../dialogs/edit_ticket_dialog.dart';
-import '../models/product_model.dart';
 
 class TicketCard extends StatelessWidget {
-  final ProductModel item;
+  final Products item;
   const TicketCard({super.key, required this.item});
 
   @override
@@ -27,22 +30,27 @@ class TicketCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      item.productName,
+                      item.name,
                       style: const TextStyle(fontSize: 15.0),
                     ),
                     Text(
-                      item.type,
+                      item.description,
                       style: const TextStyle(fontSize: 11.0),
                     ),
                   ],
                 ),
               ),
               IconButton(
-                onPressed: () {
-                  showDialog(
+                onPressed: () async {
+                  final confirm = await showDialog(
                     context: context,
                     builder: (context) => const DeleteTicketDialog(),
                   );
+                  if (confirm == true) {
+                    context.read<ProductsBloc>().add(
+                          DeleteProductsEvent(item.id.toString()),
+                        );
+                  }
                 },
                 icon: Assets.icons.delete.svg(),
               ),

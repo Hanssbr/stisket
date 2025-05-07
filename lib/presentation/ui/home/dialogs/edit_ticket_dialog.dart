@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/core.dart';
-import '../models/product_model.dart';
+import '../../../../data/model/products_model.dart';
 
 class EditTicketDialog extends StatelessWidget {
-  final ProductModel item;
+  final Products item;
   const EditTicketDialog({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController(text: item.productName);
+    final nameController = TextEditingController(text: item.name);
     final priceController = TextEditingController(text: '${item.price}');
 
     int parseCurrency(String text) =>

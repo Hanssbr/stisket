@@ -24,4 +24,21 @@ class ProductRemoteDatasource {
       throw Exception('Failed to load products');
     }
   }
+
+  Future<void> deleteProducts(String id) async{
+    final token = await AuthLocalDatasource().getToken();
+    final response = await http.delete(
+      Uri.parse('https://tiket.hanssu.my.id/api/all-products/$id'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token'
+      }
+    );
+
+    if (response.statusCode != 200) {
+      final body = jsonDecode(response.body);
+      throw Exception(body['message'] ?? 'Gagal menghapus produk.');
+    }
+  }
 }
